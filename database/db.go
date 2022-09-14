@@ -1,35 +1,45 @@
 package database
 
 import (
-	"log"
 	"fmt"
+	"go-jwt/models"
+	"log"
+	"os"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"gin-api/models"
 )
 
 var (
-	host     = "localhost"
-	user     = "postgres"
-	password = "123456"
-	dbPort   = "5433"
-	dbname   = "universal"
-	db       *gorm.DB
-	err      error
+	// host     = "localhost"
+	// user     = "postgres"
+	// password = "postgres"
+	// dbPort   = "5432"
+	// dbname   = "simple-api"
+	db  *gorm.DB
+	err error
 )
 
 func StartDB() {
-	config := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable", host, user, password, dbname, dbPort)
+	host := os.Getenv("DB_HOST")
+	user := os.Getenv("DB_USER")
+	password := os.Getenv("DB_PASSWORD")
+	dbPort := os.Getenv("DB_PORT")
+	dbname := os.Getenv("DB_NAME")
 
-	db, err = gorm.Open(postgres.Open(config), &gorm.Config{})
+	config := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=require TimeZone=Asia/Shanghai", host, user, password, dbname, dbPort)
+	dsn := config
+	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+
 	if err != nil {
-		log.Fatal("error connecting to database :", err)
+		log.Fatal("errror connecting to database :", err)
 	}
 
-	db.AutoMigrate(&models.Car{})
+	fmt.Println("sukses koneksi ke database")
+	db.Debug().AutoMigrate(models.User{}, models.Product{})
+
 }
 
 func GetDB() *gorm.DB {
-	
 	return db
 }

@@ -1,14 +1,14 @@
 package main
 
 import (
-	"gin-api/database"
-	"gin-api/routers"
+	"go-jwt/database"
+	"go-jwt/router"
+	"os"
 )
 
 func main() {
 	database.StartDB()
-	
-	var PORT = ":8080"
-
-	routers.StartServer().Run(PORT)
+	r := router.StartApp()
+	port := os.Getenv("PORT")
+	r.Run(":" + port)
 }
