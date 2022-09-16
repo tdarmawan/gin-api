@@ -15,17 +15,17 @@ type peserta struct {
 }
 
 
-func Main() {
+func Handler() {
 	http.HandleFunc("/", renderTemplate)
 	http.HandleFunc("/login", login)
 	http.HandleFunc("/logout", logout)
 
-	fmt.Println("starting web server at http://localhost:8080/")
-	err := http.ListenAndServe(":8080", nil)
-		if err != nil {
-		log.Fatal("Error Starting the HTTP Server : ", err)
-		return
-	}
+	// fmt.Println("starting web server at http://localhost:8080/")
+	// err := http.ListenAndServe(":8080", nil)
+	// 	if err != nil {
+	// 	log.Fatal("Error Starting the HTTP Server : ", err)
+	// 	return
+	// }
 }
 
 func renderTemplate(w http.ResponseWriter, r *http.Request) {
