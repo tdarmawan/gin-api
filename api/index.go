@@ -15,7 +15,7 @@ type peserta struct {
 }
 
 
-func Handler(w http.ResponseWriter, r *http.Request) {
+func Main(w http.ResponseWriter, r *http.Request) {
 	http.HandleFunc("/", renderTemplate)
 	http.HandleFunc("/login", login)
 	http.HandleFunc("/logout", logout)
