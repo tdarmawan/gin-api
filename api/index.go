@@ -16,9 +16,9 @@ type peserta struct {
 
 
 func Main(w http.ResponseWriter, r *http.Request) {
-	http.HandleFunc("/", renderTemplate)
-	http.HandleFunc("/login", login)
-	http.HandleFunc("/logout", logout)
+	http.HandleFunc("/", RenderTemplate)
+	http.HandleFunc("/login", Login)
+	http.HandleFunc("/logout", Logout)
 
 	// fmt.Println("starting web server at http://localhost:8080/")
 	// err := http.ListenAndServe(":8080", nil)
@@ -28,7 +28,7 @@ func Main(w http.ResponseWriter, r *http.Request) {
 	// }
 }
 
-func renderTemplate(w http.ResponseWriter, r *http.Request) {
+func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		var tmpl = template.Must(template.New("form").ParseFiles("login.html"))
 		var err = tmpl.Execute(w, nil)
@@ -42,7 +42,7 @@ func renderTemplate(w http.ResponseWriter, r *http.Request) {
 http.Error(w, "", http.StatusBadRequest)
 }
 
-func login(w http.ResponseWriter, r *http.Request) {
+func Login(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		var tmpl = template.Must(template.New("result").ParseFiles("form.html"))
 
@@ -53,7 +53,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 		var email = r.FormValue("email")
 
 		emails := []string{"tdarmawan@hacktiv8.com","rendih@gmail.com","tiara@gmail.com","shelly@gmail.com","tika@gmail.com"}
-		output := generatebiodata(emails)
+		output := GenerateBiodata(emails)
 
 		var argint int
 
@@ -78,7 +78,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 http.Error(w, "", http.StatusBadRequest)
 }
 
-func logout(w http.ResponseWriter, r *http.Request){
+func Logout(w http.ResponseWriter, r *http.Request){
 	if r.Method == "GET" {
 			var tmpl = template.Must(template.New("form").ParseFiles("login.html"))
 			var err = tmpl.Execute(w, nil)
@@ -92,7 +92,7 @@ func logout(w http.ResponseWriter, r *http.Request){
 http.Error(w, "", http.StatusBadRequest)
 }
 
-func generatebiodata(bio []string) []peserta {
+func GenerateBiodata(bio []string) []peserta {
 	nama := []string{"tdarmawan","rendih","Tiaramut","ShellyS","AtikaR"}
 	addr := []string{"Kota A", "Kota B", "Kota C", "Kota D", "Kota E"}
 	alasan := []string{"Alasan Thomas", "Alasan Rendi", "Alasan Tiara", "Alasan Shelly", "Alasan Tika"}
