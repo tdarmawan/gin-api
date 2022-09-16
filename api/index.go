@@ -30,7 +30,7 @@ func Main() {
 
 func renderTemplate(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
-		var tmpl = template.Must(template.New("form").ParseFiles("index.html"))
+		var tmpl = template.Must(template.New("form").ParseFiles("login.html"))
 		var err = tmpl.Execute(w, nil)
 
 		if err != nil {
@@ -44,7 +44,7 @@ http.Error(w, "", http.StatusBadRequest)
 
 func login(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
-		var tmpl = template.Must(template.New("result").ParseFiles("index.html"))
+		var tmpl = template.Must(template.New("result").ParseFiles("form.html"))
 
 		if err := r.ParseForm(); err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
