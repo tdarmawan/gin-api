@@ -28,7 +28,7 @@ func main() {
 	if *port != -1 {
 		portStr = fmt.Sprintf(":%d", *port)
 		listener = http.ListenAndServe
-		http.Handle("/", http.FileServer(http.Dir("./public")))
+		// http.Handle("/", http.FileServer(http.Dir("./public")))
 		http.HandleFunc("/", RenderTemplate)
 		http.HandleFunc("/login", Login)
 		http.HandleFunc("/logout", Logout)
@@ -37,22 +37,19 @@ func main() {
 }
 
 func RenderTemplate(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "GET" {
-		var tmpl = template.Must(template.New("form").ParseFiles("public/index.html"))
+
+		var tmpl = template.Must(template.New("form").ParseFiles("./public/index.html"))
 		var err = tmpl.Execute(w, nil)
 
 		if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
-		return
-}
-
-http.Error(w, "", http.StatusBadRequest)
+		http.Error(w, "", http.StatusBadRequest)
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
-		var tmpl = template.Must(template.New("result").ParseFiles("index.html"))
+		var tmpl = template.Must(template.New("result").ParseFiles("./public/index.html"))
 
 		if err := r.ParseForm(); err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -88,7 +85,7 @@ http.Error(w, "", http.StatusBadRequest)
 
 func Logout(w http.ResponseWriter, r *http.Request){
 	if r.Method == "GET" {
-			var tmpl = template.Must(template.New("form").ParseFiles("login.html"))
+			var tmpl = template.Must(template.New("form").ParseFiles("public/login.html"))
 			var err = tmpl.Execute(w, nil)
 
 			if err != nil {
@@ -118,9 +115,9 @@ func GenerateBiodata(bio []string) []peserta {
 	return generate
 }
 
-func cacheControlMiddleware(h http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Cache-Control", "public, max-age=300")
-		h.ServeHTTP(w, r)
-	})
-}
+// func cacheControlMiddleware(h http.Handler) http.Handler {
+// 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+// 		w.Header().Set("Cache-Control", "public, max-age=300")
+// 		h.ServeHTTP(w, r)
+// 	})
+// }
