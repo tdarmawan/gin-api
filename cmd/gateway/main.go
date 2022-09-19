@@ -118,9 +118,9 @@ func GenerateBiodata(bio []string) []peserta {
 	return generate
 }
 
-// func cacheControlMiddleware(h http.Handler) http.Handler {
-// 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-// 		w.Header().Set("Cache-Control", "public, max-age=300")
-// 		h.ServeHTTP(w, r)
-// 	})
-// }
+func cacheControlMiddleware(h http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Cache-Control", "public, max-age=300")
+		h.ServeHTTP(w, r)
+	})
+}
