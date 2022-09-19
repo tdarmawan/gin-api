@@ -27,7 +27,7 @@ func main() {
 	if *port != -1 {
 		portStr = fmt.Sprintf(":%d", *port)
 		listener = http.ListenAndServe
-		http.Handle("/", http.FileServer(http.Dir("./public")))
+		// http.Handle("/", http.FileServer(http.Dir("./public")))
 	}
 
 	// http.Handle("/api/feed", feed2json.Handler(
