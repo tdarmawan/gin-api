@@ -29,16 +29,10 @@ func main() {
 		portStr = fmt.Sprintf(":%d", *port)
 		listener = http.ListenAndServe
 		// http.Handle("/", http.FileServer(http.Dir("./public")))
+		http.HandleFunc("/", RenderTemplate)
+		http.HandleFunc("/login", Login)
+		http.HandleFunc("/logout", Logout)
 	}
-
-	// http.Handle("/api/feed", feed2json.Handler(
-	// 	feed2json.StaticURLInjector("https://news.ycombinator.com/rss"),
-	// 	nil, nil, nil, cacheControlMiddleware))
-
-	http.HandleFunc("/", RenderTemplate)
-	http.HandleFunc("/login", Login)
-	http.HandleFunc("/logout", Logout)
-
 	log.Fatal(listener(portStr, nil))
 }
 
