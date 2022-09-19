@@ -38,7 +38,7 @@ func main() {
 
 func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
-		var tmpl = template.Must(template.New("form").ParseFiles("index.html"))
+		var tmpl = template.Must(template.New("form").ParseFiles("public/index.html"))
 		var err = tmpl.Execute(w, nil)
 
 		if err != nil {
