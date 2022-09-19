@@ -29,7 +29,7 @@ func main() {
 		portStr = fmt.Sprintf(":%d", *port)
 		listener = http.ListenAndServe
 		// http.Handle("/", http.FileServer(http.Dir("./public")))
-		http.HandleFunc("/api/", RenderTemplate)
+		http.HandleFunc("/", RenderTemplate)
 		http.HandleFunc("/api/login", Login)
 		http.HandleFunc("/api/logout", Logout)
 	}
