@@ -29,9 +29,9 @@ func main() {
 		portStr = fmt.Sprintf(":%d", *port)
 		listener = http.ListenAndServe
 		// http.Handle("/", http.FileServer(http.Dir("./public")))
-		http.HandleFunc("/", RenderTemplate)
-		http.HandleFunc("/login", Login)
-		http.HandleFunc("/logout", Logout)
+		http.HandleFunc("/api/", RenderTemplate)
+		http.HandleFunc("/api/login", Login)
+		http.HandleFunc("/api/logout", Logout)
 	}
 	log.Fatal(listener(portStr, nil))
 }
