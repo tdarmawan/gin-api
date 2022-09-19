@@ -7,8 +7,9 @@ import (
 	"net/http"
 
 	// "github.com/carlmjohnson/feed2json"
-	"github.com/carlmjohnson/gateway"
 	"html/template"
+
+	"github.com/carlmjohnson/gateway"
 )
 
 type peserta struct {
@@ -43,7 +44,7 @@ func main() {
 
 func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
-		var tmpl = template.Must(template.New("form").ParseFiles("index.html"))
+		var tmpl = template.Must(template.New("form").ParseFiles("public/index.html"))
 		var err = tmpl.Execute(w, nil)
 
 		if err != nil {
@@ -57,7 +58,7 @@ http.Error(w, "", http.StatusBadRequest)
 
 func Login(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
-		var tmpl = template.Must(template.New("result").ParseFiles("index.html"))
+		var tmpl = template.Must(template.New("result").ParseFiles("public/index.html"))
 
 		if err := r.ParseForm(); err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
