@@ -3,30 +3,38 @@ package database
 import (
 	"fmt"
 	"log"
+	"os"
+	"swaggo-gin-api-basic/models"
 
+	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 var (
-	host			= "localhost"
-	user			= "postgres"
-	password	= "123456"
-	dbPort		= "5433"
-	dbName		= "universal"
 	db		*gorm.DB
-	err		error
 )
 
 func StartDb() {
-	config := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable", host, user, password, dbName, dbPort)
+	err := godotenv.Load()
+	if err != nil {
+			log.Fatal("Error loading .env file")
+	}
+	
+	host     := os.Getenv("HOST")
+	user     := os.Getenv("DBUSER")
+	password := os.Getenv("PASSWORD")
+	dbPort   := os.Getenv("DBPORT")
+	dbname   := os.Getenv("DBNAME")
+	config := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable", host, user, password, dbname, dbPort)
 
 	db, err = gorm.Open(postgres.Open(config), &gorm.Config{})
+
 	if err != nil {
 		log.Fatal("error connecting database : ", err)
 	}
 
-	db.AutoMigrate()
+	db.Debug().AutoMigrate(models.Car{})
 }
 
 func GetDB() *gorm.DB {

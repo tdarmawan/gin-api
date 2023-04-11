@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"swaggo-gin-api-basic/database"
 	"swaggo-gin-api-basic/routes"
 )
@@ -8,7 +9,7 @@ import (
 func main() {
 	database.StartDb()
 
-	var PORT = ":7070"
+	var PORT = os.Getenv("PORT")
 
 	routes.StartServer().Run(PORT)
 }
