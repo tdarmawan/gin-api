@@ -13,6 +13,7 @@ import (
 
 var (
 	db		*gorm.DB
+	err  error
 )
 
 func StartDb() {
