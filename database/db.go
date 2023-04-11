@@ -6,7 +6,7 @@ import (
 	"os"
 	"swaggo-gin-api-basic/models"
 
-	"github.com/joho/godotenv"
+	// "github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -16,10 +16,10 @@ var (
 )
 
 func StartDb() {
-	err := godotenv.Load()
-	if err != nil {
-			log.Fatal("Error loading .env file")
-	}
+	// err := godotenv.Load()
+	// if err != nil {
+	// 		log.Fatal("Error loading .env file")
+	// }
 	
 	host     := os.Getenv("PGHOST")
 	user     := os.Getenv("PGUSER")
