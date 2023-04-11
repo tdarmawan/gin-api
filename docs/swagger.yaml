@@ -1,0 +1,44 @@
+basePath: /
+definitions:
+  models.Car:
+    properties:
+      harga:
+        type: integer
+      id:
+        type: integer
+      merk:
+        type: string
+      pemilik:
+        type: string
+      type:
+        type: string
+    type: object
+host: localhost:7070
+info:
+  contact:
+    email: soberkoder@swagger.io
+    name: API Support
+  description: This is Car Service REST API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Car API
+  version: "1.0"
+paths:
+  /cars:
+    get:
+      consumes:
+      - application/json
+      description: Get details of all car
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Car'
+      summary: Get details
+      tags:
+      - cars
+swagger: "2.0"
