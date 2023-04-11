@@ -21,11 +21,11 @@ func StartDb() {
 			log.Fatal("Error loading .env file")
 	}
 	
-	host     := os.Getenv("HOST")
-	user     := os.Getenv("DBUSER")
-	password := os.Getenv("PASSWORD")
-	dbPort   := os.Getenv("DBPORT")
-	dbname   := os.Getenv("DBNAME")
+	host     := os.Getenv("PGHOST")
+	user     := os.Getenv("PGUSER")
+	password := os.Getenv("PGPASSWORD")
+	dbPort   := os.Getenv("PGPORT")
+	dbname   := os.Getenv("PGDATABASE")
 	config := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable", host, user, password, dbname, dbPort)
 
 	db, err = gorm.Open(postgres.Open(config), &gorm.Config{})
